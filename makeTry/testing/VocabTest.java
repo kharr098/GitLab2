@@ -12,7 +12,17 @@ import static org.hamcrest.Matchers.*;
  * Test of the Vocabulary class
  */
 public class VocabTest {
-                  
+         
+	@Test
+	public void testConstructor()
+    {
+        Vocabulary v = new Vocabulary();
+        // A newly constructed vocabulary should have no starting words and no pairs.
+        assertTrue (v.getStartingWords().isEmpty());
+        assertThat(v.getNumStartingWords(), is(0));
+        assertThat(v.getNumWordPairs(), is(0));
+        assertTrue(v.getWordsThatCanFollow("the").isEmpty());
+    }
 
     @Test
     public void testAddStartingWord() {
@@ -50,7 +60,50 @@ public class VocabTest {
 
     }
   
+    @Test
+    public void testAddWordPair()
+    {
+        Vocabulary v = new Vocabulary();
+        v.addWordPair("a", "b");
+        assertTrue (v.getStartingWords().isEmpty());
+        assertThat(v.getNumStartingWords(), is(0));
+        assertThat(v.getNumWordPairs(), is(1));
+        assertThat(v.getWordsThatCanFollow("a"), contains("b"));
+        assertThat(v.getWordsThatCanFollow("b").isEmpty(), is(true));
+        assertThat(v.getWordsThatCanFollow("c").isEmpty(), is(true));
 
+        v.addWordPair("b", "c");
+        assertTrue (v.getStartingWords().isEmpty());
+        assertThat(v.getNumStartingWords(), is(0));
+        assertThat(v.getNumWordPairs(), is(2));
+        assertThat(v.getWordsThatCanFollow("a"), contains("b"));
+        assertThat(v.getWordsThatCanFollow("b"), contains("c"));
+        assertThat(v.getWordsThatCanFollow("c").isEmpty(), is(true));
+
+        v.addWordPair("c", "c");
+        assertTrue (v.getStartingWords().isEmpty());
+        assertThat(v.getNumStartingWords(), is(0));
+        assertThat(v.getNumWordPairs(), is(3));
+        assertThat(v.getWordsThatCanFollow("a"), contains("b"));
+        assertThat(v.getWordsThatCanFollow("b"), contains("c"));
+        assertThat(v.getWordsThatCanFollow("c"), contains("c"));
+
+        v.addWordPair("a", "c");
+        assertTrue (v.getStartingWords().isEmpty());
+        assertThat(v.getNumStartingWords(), is(0));
+        assertThat(v.getNumWordPairs(), is(4));
+        assertThat(v.getWordsThatCanFollow("a"), contains("b", "c"));
+        assertThat(v.getWordsThatCanFollow("b"), contains("c"));
+        assertThat(v.getWordsThatCanFollow("c"), contains("c"));
+
+        v.addWordPair("b", "c");
+        assertTrue (v.getStartingWords().isEmpty());
+        assertThat(v.getNumStartingWords(), is(0));
+        assertThat(v.getNumWordPairs(), is(5));
+        assertThat(v.getWordsThatCanFollow("a"), contains("b", "c"));
+        assertThat(v.getWordsThatCanFollow("b"), contains("c", "c"));
+        assertThat(v.getWordsThatCanFollow("c"), contains("c"));
+    }
     
 
 }
