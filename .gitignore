@@ -112,3 +112,15 @@ makeTry/variations/Vocabulary.java.instrum
 makeTry/variations/Vocabulary.java.original
 makeTry/.classpath
 .classpath
+.project
+testBranch.txt
+makeTry/.project
+makeTry/.classpath
+makeTry/.gitignore
+makeTry/.project
+makeTry/testing/UnitTestTracker.java
+makeTry/testing/VocabTest.java.completed
+makeTry/variations/Vocabulary.java.bug1
+makeTry/variations/Vocabulary.java.bug2
+makeTry/variations/Vocabulary.java.instrum
+makeTry/variations/Vocabulary.java.original
